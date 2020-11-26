@@ -1,0 +1,119 @@
+body {
+    background-color: #DDDDDD;
+}
+.strike-through {
+    text-decoration: line-through;
+    color: #ddd;
+}
+.all-data, .active-data, .complete-data, .del-complete {
+    cursor: pointer;
+}
+
+.todos{
+    font-size: 60px;
+    color: #d6bfc1;
+}
+
+table#task {
+    width: 100%;
+}
+td.check-box {
+    width: 10px;
+    position: relative;
+    left: -10px;
+    top: 5px;
+}
+
+.allSection {
+    width: 50%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px 45px 0;
+    box-shadow: 0px 5px 5px #00000096;
+    border-radius: 5px;
+}
+.inputField input {
+    border: none;
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 20px;
+    padding-left: 25px;
+    font-style: italic;
+}
+.inputField input:focus {
+    box-shadow: none;
+    border:none;
+    outline: none;
+}
+
+.inputField input::placeholder {
+    color:#ddd
+}
+.task-dbl input:focus {
+    box-shadow: none;
+    /* border:none; */
+    outline: none;
+}
+li.nav-item.active a {
+    color: #cacaca !important;
+    font-size: 14px;
+}
+.left-item {
+    position: relative;
+    left: -50px;
+}
+.right-item{
+    position: relative;
+    right: -70px;
+}
+li.nav-item.active.middle-all {
+    padding-left: 40px;
+}
+a.nav-link.del-complete:hover {
+    text-decoration: underline;
+}
+td.check-box-show {
+    opacity: 1;
+}
+td.check-box-hide {
+    opacity: 0;
+}
+td.check-box.active{
+    visibility: visible;
+}
+td.button-close-right {
+    position: relative;
+    right: 0px;
+    cursor: pointer;
+}
+.button-close-right {
+    visibility: hidden;
+}
+.data-remove:hover .button-close-right {
+    visibility: visible;
+}
+.data-remove {
+    display: block;
+}
+.task-dbl {
+    width: 100%;
+    font-size: 20px;
+}
+i {
+    font-size: 20px;
+}
+i.far.fa-check-circle {
+    color: green;
+    margin: 4px 4px 0 0;
+}
+i.far fa-times-circle{
+    color: red;
+}
+td.task-dbl input {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+td.task-dbl:hover .button-close-right {
+    display: none;
+}
