@@ -48,19 +48,26 @@ jQuery(document).ready(function () {
  // Start Edit Data Section
 
   jQuery("body").on("dblclick",".task-dbl", function (e) {
-    let sval = jQuery(this).text();
-    jQuery(this).html(`<input type='text' value='`+ sval +`'>`);
-    jQuery(this).parents("tr").removeClass("done");
-    jQuery(this).siblings(".button-close-right").hide();
+      let sval = jQuery(this).text();
+      if( sval != ""){
+      jQuery(this).html(`<input type='text' value='`+ sval +`'>`);
+      jQuery(this).parents("tr").removeClass("done");
+      jQuery(this).siblings(".button-close-right").hide();
+      jQuery(this).siblings(".data-change").removeClass("data-change");
+    }
+    
+    
 });
 
 jQuery("body").on("keyup",".task-dbl input", function (e) {
   if (e.key === "Enter" || e.keyCode === 13) {
+    jQuery(this).parents("td").siblings(".button-close-right").show();
+    jQuery(this).parents("td").siblings(".check-box-hide").addClass("data-change");
     let sval = jQuery(this).val();
     let taskID= jQuery(this).parents("tr").attr("id");
     taskID = taskID.substr(4, 3);
     jQuery(this).parent().html(`<span>`+ sval +`</span>`);
-    jQuery(this).siblings(".button-close-right").show();
+    
     $.ajax({
       type: "post",
       url: $("meta[name='url']").attr("content") + "api/update-list.php",
