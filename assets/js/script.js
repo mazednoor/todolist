@@ -7,15 +7,14 @@ jQuery(document).ready(function () {
 
       $.ajax({
         type: "post",
-        url: $("meta[name='url']").attr("content") + "api/insert-list.php",
+        url: jQuery("meta[name='url']").attr("content") + "api/insert-list.php",
         data: {
           "list": sval,
         },
         success: function (response) {
-          console.log(response);
           dList = "";
           counter = 0;
-          $(".data-remove").remove();
+          jQuery(".data-remove").remove();
           for (var index in response["tasks"]) {
             if(response["tasks"][index]["status"] == 1){
               dList += `<tr class='data-remove done' id='dbc-` + response["tasks"][index]["id"] +`'>`;
@@ -34,10 +33,10 @@ jQuery(document).ready(function () {
             
             counter++;
           }
-          $("#task").append(dList);
-          $("#press_enter").val("");
-          $("#menu").show();
-          $("#num-items").text(counter);
+          jQuery("#task").append(dList);
+          jQuery("#press_enter").val("");
+          jQuery("#menu").show();
+          jQuery("#num-items").text(counter);
         },
       });
     }
@@ -63,7 +62,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
     jQuery(this).siblings(".button-close-right").show();
     $.ajax({
       type: "post",
-      url: $("meta[name='url']").attr("content") + "api/update-list.php",
+      url: jQuery("meta[name='url']").attr("content") + "api/update-list.php",
       data: {
         "list": sval,
         "tid": taskID,
@@ -90,7 +89,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
           jQuery(this).addClass('check-box-show').removeClass('check-box-hide');
           $.ajax({
             type: "post",
-            url: $("meta[name='url']").attr("content") + "api/task-status.php",
+            url: jQuery("meta[name='url']").attr("content") + "api/task-status.php",
             data: {
               "tstatus": taskID,
               "status" : 1,
@@ -105,7 +104,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
           jQuery(this).addClass('check-box-hide').removeClass('check-box-show');
           $.ajax({
             type: "post",
-            url: $("meta[name='url']").attr("content") + "api/task-status.php",
+            url: jQuery("meta[name='url']").attr("content") + "api/task-status.php",
             data: {
               "tstatus": taskID,
               "status" : 0,
@@ -146,7 +145,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
           jQuery(this).siblings(".data-change").addClass('check-box-show').removeClass('check-box-hide');
           $.ajax({
             type: "post",
-            url: $("meta[name='url']").attr("content") + "api/task-status.php",
+            url: jQuery("meta[name='url']").attr("content") + "api/task-status.php",
             data: {
               "tstatus": taskID,
               "status" : 1,
@@ -160,7 +159,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
           item++;
           $.ajax({
             type: "post",
-            url: $("meta[name='url']").attr("content") + "api/task-status.php",
+            url: jQuery("meta[name='url']").attr("content") + "api/task-status.php",
             data: {
               "tstatus": taskID,
               "status" : 0,
@@ -215,7 +214,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
         if (isDelete == true) {
            $.ajax({
               type: 'POST',
-              url: $("meta[name='url']").attr("content") + "api/delete-list.php",
+              url: jQuery("meta[name='url']").attr("content") + "api/delete-list.php",
               data: {
                 "taskid": post_arr,
               },
@@ -225,6 +224,7 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
                     if(response == 0){
                     jQuery("#menu").hide();
                   }
+                  jQuery(".del-complete").hide();
               }
            });
         } 
