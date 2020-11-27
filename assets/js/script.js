@@ -228,10 +228,11 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
               },
               success: function(response){
                   
-                    jQuery(".done").remove();
-                    if(response == 0){
+                  jQuery(".done").remove();
+                  if(response == 0){
                     jQuery("#menu").hide();
                   }
+                  jQuery(".del-complete").hide();
               }
            });
         } 
