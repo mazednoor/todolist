@@ -1,6 +1,7 @@
 // Start Insert Data Section
 
 jQuery(document).ready(function () {
+  var input_val ="";
   jQuery("#press_enter").on("keyup", function (e) {
     if (e.key === "Enter" || e.keyCode === 13) {
       let sval = jQuery(this).val();
@@ -49,9 +50,9 @@ jQuery(document).ready(function () {
  // Start Edit Data Section
 
   jQuery("body").on("dblclick",".task-dbl", function (e) {
-      let sval = jQuery(this).text();
-      if( sval != ""){
-      jQuery(this).html(`<input type='text' value='`+ sval +`'>`);
+      input_val = jQuery(this).text();
+      if( input_val != ""){
+      jQuery(this).html(`<input type='text' value='`+ input_val +`'>`);
       jQuery(this).parents("tr").removeClass("done");
       jQuery(this).siblings(".button-close-right").hide();
       jQuery(this).siblings(".data-change").removeClass("data-change");
@@ -67,19 +68,23 @@ jQuery("body").on("keyup",".task-dbl input", function (e) {
     let sval = jQuery(this).val();
     let taskID= jQuery(this).parents("tr").attr("id");
     taskID = taskID.substr(4, 3);
-    jQuery(this).parent().html(`<span>`+ sval +`</span>`);
-    
-    $.ajax({
-      type: "post",
-      url: $("meta[name='url']").attr("content") + "api/update-list.php",
-      data: {
-        "list": sval,
-        "tid": taskID,
-      },
-      success: function (response) {
-        
-      },
-    });
+    console.log(input_val);
+    if( (sval != "")){
+      jQuery(this).parent().html(`<span>`+ sval +`</span>`);
+      if((input_val != sval)){
+      $.ajax({
+        type: "post",
+        url: $("meta[name='url']").attr("content") + "api/update-list.php",
+        data: {
+          "list": sval,
+          "tid": taskID,
+        },
+        success: function (response) {
+          
+        },
+      });
+    }
+    }
   }
 });
 
