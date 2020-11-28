@@ -4,42 +4,43 @@ jQuery(document).ready(function () {
   jQuery("#press_enter").on("keyup", function (e) {
     if (e.key === "Enter" || e.keyCode === 13) {
       let sval = jQuery(this).val();
-
-      $.ajax({
-        type: "post",
-        url: $("meta[name='url']").attr("content") + "api/insert-list.php",
-        data: {
-          "list": sval,
-        },
-        success: function (response) {
-          console.log(response);
-          dList = "";
-          counter = 0;
-          $(".data-remove").remove();
-          for (var index in response["tasks"]) {
-            if(response["tasks"][index]["status"] == 1){
-              dList += `<tr class='data-remove done' id='dbc-` + response["tasks"][index]["id"] +`'>`;
-              dList += "<td class='data-change check-box-show'><i class='far fa-check-circle'></i></td>";
-              dList += "<td class='task-dbl strike-through'><span>"+ response["tasks"][index]["title"] + "</span></td>";
-              dList += "<td class='button-close-right'><i class='far fa-times-circle'></i></td>";
+      if (sval != ""){
+        $.ajax({
+          type: "post",
+          url: $("meta[name='url']").attr("content") + "api/insert-list.php",
+          data: {
+            "list": sval,
+          },
+          success: function (response) {
+            console.log(response);
+            dList = "";
+            counter = 0;
+            $(".data-remove").remove();
+            for (var index in response["tasks"]) {
+              if(response["tasks"][index]["status"] == 1){
+                dList += `<tr class='data-remove done' id='dbc-` + response["tasks"][index]["id"] +`'>`;
+                dList += "<td class='data-change check-box-show'><i class='far fa-check-circle'></i></td>";
+                dList += "<td class='task-dbl strike-through'><span>"+ response["tasks"][index]["title"] + "</span></td>";
+                dList += "<td class='button-close-right'><i class='far fa-times-circle'></i></td>";
+                dList += "</tr>";
+              }
+              else {
+                dList += `<tr class='data-remove' id='dbc-` + response["tasks"][index]["id"] +`'>`;
+                dList += "<td class='data-change check-box-hide'><i class='far fa-check-circle'></i></td>";
+                dList += "<td class='task-dbl'><span>"+ response["tasks"][index]["title"] + "</span></td>";
+                dList += "<td class='button-close-right'><i class='far fa-times-circle'></i></td>";
               dList += "</tr>";
+              }
+              
+              counter++;
             }
-            else {
-              dList += `<tr class='data-remove' id='dbc-` + response["tasks"][index]["id"] +`'>`;
-              dList += "<td class='data-change check-box-hide'><i class='far fa-check-circle'></i></td>";
-              dList += "<td class='task-dbl'><span>"+ response["tasks"][index]["title"] + "</span></td>";
-              dList += "<td class='button-close-right'><i class='far fa-times-circle'></i></td>";
-            dList += "</tr>";
-            }
-            
-            counter++;
-          }
-          $("#task").append(dList);
-          $("#press_enter").val("");
-          $("#menu").show();
-          $("#num-items").text(counter);
-        },
-      });
+            $("#task").append(dList);
+            $("#press_enter").val("");
+            $("#menu").show();
+            $("#num-items").text(counter);
+          },
+        });
+      }
     }
   });
 
